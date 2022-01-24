@@ -1,6 +1,7 @@
 package me.mocadev.springbootadvanced.app.v2;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.mocadev.springbootadvanced.trace.TraceId;
 import me.mocadev.springbootadvanced.trace.TraceStatus;
 import me.mocadev.springbootadvanced.trace.hellotrace.HelloTraceV2;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class OrderRepositoryV2 {
 
 	private final HelloTraceV2 trace;
@@ -23,6 +25,8 @@ public class OrderRepositoryV2 {
 		TraceStatus status = null;
 		try {
 			status = trace.beginSync(traceId, "OrderRepositoryV2.save()");
+			log.info("trace = {}", status.getTraceId());
+			log.info("traceId = {}", traceId);
 			if (itemId.equals("ex")) {
 				throw new IllegalStateException("예외 발생");
 			}

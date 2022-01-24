@@ -21,14 +21,14 @@ public class HelloTraceV2 {
 	private static final String EX_PREFIX = "<X-";
 
 	public TraceStatus begin(String message) {
-		final TraceId traceId = new TraceId();
+		TraceId traceId = new TraceId();
 		final long startTimeMs = System.currentTimeMillis();
 		log.info("[{}] {}{}", traceId.getId(), addSpace(START_PREFIX, traceId.getLevel()), message);
 		return new TraceStatus(traceId, startTimeMs, message);
 	}
 
 	public TraceStatus beginSync(TraceId beforeTraceId, String message) {
-		final TraceId nextId = beforeTraceId.createNextId();
+		TraceId nextId = beforeTraceId.createNextId();
 		final long startTimeMs = System.currentTimeMillis();
 		log.info("[{}] {}{}", nextId.getId(), addSpace(START_PREFIX, nextId.getLevel()), message);
 		return new TraceStatus(nextId, startTimeMs, message);

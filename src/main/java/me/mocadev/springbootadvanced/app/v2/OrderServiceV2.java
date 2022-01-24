@@ -1,6 +1,7 @@
 package me.mocadev.springbootadvanced.app.v2;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.mocadev.springbootadvanced.trace.TraceId;
 import me.mocadev.springbootadvanced.trace.TraceStatus;
 import me.mocadev.springbootadvanced.trace.hellotrace.HelloTraceV2;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrderServiceV2 {
 
 	private final OrderRepositoryV2 orderRepositoryV2;
@@ -24,6 +26,8 @@ public class OrderServiceV2 {
 		TraceStatus status = null;
 		try {
 			status = trace.beginSync(traceId, "OrderServiceV2.orderItem()");
+			log.info("trace = {}", status.getTraceId());
+			log.info("traceId = {}", traceId);
 			orderRepositoryV2.save(traceId, itemId);
 			trace.end(status);
 		} catch (Exception e) {

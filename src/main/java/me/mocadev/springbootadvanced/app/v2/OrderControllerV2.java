@@ -1,6 +1,7 @@
 package me.mocadev.springbootadvanced.app.v2;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.mocadev.springbootadvanced.trace.TraceStatus;
 import me.mocadev.springbootadvanced.trace.hellotrace.HelloTraceV2;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class OrderControllerV2 {
 
 	private final OrderServiceV2 orderServiceV2;
@@ -25,6 +27,7 @@ public class OrderControllerV2 {
 		TraceStatus status = null;
 		try {
 			status = trace.begin("OrderControllerV2.request()");
+			log.info("trace = {}", status.getTraceId().toString());
 			orderServiceV2.orderItem(status.getTraceId(), itemId);
 			trace.end(status);
 			return "ok";

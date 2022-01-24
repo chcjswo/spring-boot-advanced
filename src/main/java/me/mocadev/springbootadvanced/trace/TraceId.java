@@ -48,4 +48,12 @@ public class TraceId {
 		return level;
 	}
 
+	@Override
+	public String toString() {
+		return "TraceId{" +
+			"id='" + id + '\'' +
+			", level=" + level +
+			'}';
+	}
+
 }
