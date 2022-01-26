@@ -1,7 +1,7 @@
 package me.mocadev.springbootadvanced.config;
 
-import me.mocadev.springbootadvanced.trace.logtrace.FieldLogTrace;
 import me.mocadev.springbootadvanced.trace.logtrace.LogTrace;
+import me.mocadev.springbootadvanced.trace.logtrace.ThreadLocalLogTrace;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,7 +17,7 @@ public class LogTraceConfig {
 
 	@Bean
 	public LogTrace logTrace() {
-		return new FieldLogTrace();
+		return new ThreadLocalLogTrace();
 	}
 
 }
