@@ -2,6 +2,7 @@ package me.mocadev.springbootadvanced.trace.strategy;
 
 import lombok.extern.slf4j.Slf4j;
 import me.mocadev.springbootadvanced.trace.strategy.code.ContextV1;
+import me.mocadev.springbootadvanced.trace.strategy.code.Strategy;
 import me.mocadev.springbootadvanced.trace.strategy.code.StrategyLogic1;
 import me.mocadev.springbootadvanced.trace.strategy.code.StrategyLogic2;
 import org.junit.jupiter.api.Test;
@@ -46,6 +47,28 @@ public class ContextV1Test {
 
 		final StrategyLogic2 strategyLogic2 = new StrategyLogic2();
 		final ContextV1 context2 = new ContextV1(strategyLogic2);
+		context2.execute();
+	}
+
+	@Test
+	void strategyV2() {
+		final Strategy strategyLogic1 = () -> log.info("비즈니스 로직1");
+		final ContextV1 context1 = new ContextV1(strategyLogic1);
+		log.info("strategyLogic1 = {}", strategyLogic1.getClass());
+		context1.execute();
+
+		final Strategy strategyLogic2 = () -> log.info("비즈니스 로직2");
+		final ContextV1 context2 = new ContextV1(strategyLogic2);
+		log.info("strategyLogic2 = {}", strategyLogic2.getClass());
+		context2.execute();
+	}
+
+	@Test
+	void strategyV3() {
+		final ContextV1 context1 = new ContextV1(() -> log.info("비즈니스 로직1"));
+		context1.execute();
+
+		final ContextV1 context2 = new ContextV1(() -> log.info("비즈니스 로직2"));
 		context2.execute();
 	}
 
