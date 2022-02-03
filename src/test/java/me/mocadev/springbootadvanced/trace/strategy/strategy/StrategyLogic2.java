@@ -1,4 +1,4 @@
-package me.mocadev.springbootadvanced.trace.strategy.code;
+package me.mocadev.springbootadvanced.trace.strategy.strategy;
 
 import lombok.extern.slf4j.Slf4j;
 

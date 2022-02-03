@@ -1,4 +1,4 @@
-package me.mocadev.springbootadvanced.trace.strategy.code;
+package me.mocadev.springbootadvanced.trace.strategy.strategy;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -7,18 +7,12 @@ import lombok.extern.slf4j.Slf4j;
  * @version 1.0.0
  * @blog https://mocadev.tistory.com
  * @github https://github.com/chcjswo
- * @since 2022-02-02
+ * @since 2022-02-03
  **/
 @Slf4j
-public class ContextV1 {
+public class ContextV2 {
 
-	private final Strategy strategy;
-
-	public ContextV1(Strategy strategy) {
-		this.strategy = strategy;
-	}
-
-	public void execute() {
+	public void execute(Strategy strategy) {
 		long startTime = System.currentTimeMillis();
 		strategy.call();
 		long endTime = System.currentTimeMillis();
